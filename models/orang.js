@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         hooks: true,
       });
+      Orang.hasMany(models.Aset, {
+        foreignKey: "orang_id",
+      });
     }
   }
   Orang.init(
