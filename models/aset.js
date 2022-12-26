@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Keluarga extends Model {
+  class Aset extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,11 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Aset.hasMany(models.DaftarAset, { foreignKey: "daftar_aset_id" });
     }
   }
-  Keluarga.init(
+  Aset.init(
     {
-      keluarga_id: {
+      aset_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -27,23 +28,19 @@ module.exports = (sequelize, DataTypes) => {
           key: "orang_id",
         },
       },
-      orang_terkait_id: {
+      daftar_aset_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "orangs",
-          key: "orang_id",
+          model: "daftarasets",
+          key: "daftar_aset_id",
         },
-      },
-      hubungan_keluarga: {
-        type: DataTypes.ENUM("orang_tua", "anak"),
-        allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Keluarga",
+      modelName: "Aset",
     }
   );
-  return Keluarga;
+  return Aset;
 };
