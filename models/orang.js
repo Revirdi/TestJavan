@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Orang.hasMany(models.Keluarga, {
+        foreignKey: "orang_id",
+        onDelete: "CASCADE",
+        hooks: true,
+      });
     }
   }
   Orang.init(
