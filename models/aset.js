@@ -3,7 +3,7 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Aset extends Model {
     static associate(models) {
-      Aset.hasMany(models.DaftarAset, {
+      Aset.belongsTo(models.DaftarAset, {
         foreignKey: "daftar_aset_id",
         onDelete: "CASCADE",
         hooks: true,
