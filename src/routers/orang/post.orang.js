@@ -8,7 +8,7 @@ const addNewMember = async (req, res, next) => {
     const { nama, jenis_kelamin, orangtua_id } = req.body;
 
     if (jenis_kelamin != "laki-laki" || jenis_kelamin != "perempuan") {
-      res
+      return res
         .status(400)
         .send({ message: "jenis kelamin harus laki-laki / perempuan" });
     }
@@ -23,7 +23,7 @@ const addNewMember = async (req, res, next) => {
     });
 
     if (!addNewMember.dataValues)
-      res.status(500).send({ message: "Gagal menambahkan member baru" });
+      return res.status(500).send({ message: "Gagal menambahkan member baru" });
 
     const addRelation = await HubunganKeluarga.create({
       anggota_id: addNewMember.dataValues.anggota_id,
@@ -35,7 +35,7 @@ const addNewMember = async (req, res, next) => {
       data: addNewMember.dataValues,
     });
   } catch (error) {
-    res.status(500).send("something went wrong");
+    return res.status(500).send("something went wrong");
   }
 };
 

@@ -22,6 +22,11 @@ const addNewAset = async (req, res, next) => {
   }
 };
 
+const addNewMemberAset = async (req, res) => {
+  const { anggota_id, daftar_aset_id } = req.body;
+};
+
 router.post("/", addNewAset);
+router.post("/member", addNewMemberAset);
 
 module.exports = router;

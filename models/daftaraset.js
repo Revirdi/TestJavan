@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      nama_aset: DataTypes.STRING,
+      nama_aset: {
+        type: DataTypes.STRING,
+        unique: true,
+      },
       harga: DataTypes.INTEGER,
     },
     {

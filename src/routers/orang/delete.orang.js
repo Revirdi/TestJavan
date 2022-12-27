@@ -13,12 +13,12 @@ const deleteMember = async (req, res, next) => {
 
     let resDeleteMember = await resGetMember.destroy();
 
-    if (!resDeleteMember.dataValues)
-      res.status(400).send("Gagal menghapus data keluarga");
+    if (!resDeleteMember)
+      return res.status(400).send("Gagal menghapus data keluarga");
 
     res.status(200).send({ message: "Success menghapus data keluarga" });
   } catch (error) {
-    res.status(500).send("Something Went Wrong");
+    return res.status(500).send("Something Went Wrong");
   }
 };
 
