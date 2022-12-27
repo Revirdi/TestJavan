@@ -6,9 +6,15 @@ module.exports = (sequelize, DataTypes) => {
       Aset.belongsTo(models.DaftarAset, {
         foreignKey: "daftar_aset_id",
         onDelete: "CASCADE",
+        onUpdate: "CASCADE",
         hooks: true,
       });
-      Aset.belongsTo(models.Anggota, { foreignKey: "anggota_id" });
+      Aset.belongsTo(models.Anggota, {
+        foreignKey: "anggota_id",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        hooks: true,
+      });
     }
   }
   Aset.init(

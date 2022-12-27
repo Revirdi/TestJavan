@@ -7,7 +7,7 @@ const addNewMember = async (req, res, next) => {
   try {
     const { nama, jenis_kelamin, orangtua_id } = req.body;
 
-    if (jenis_kelamin != "laki-laki" || jenis_kelamin != "perempuan") {
+    if (!(jenis_kelamin == "laki-laki" || jenis_kelamin == "perempuan")) {
       return res
         .status(400)
         .send({ message: "jenis kelamin harus laki-laki / perempuan" });

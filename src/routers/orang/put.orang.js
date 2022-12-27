@@ -16,6 +16,7 @@ const editMember = async (req, res, next) => {
         where: { anggota_id },
       }
     );
+
     if (!resUpdateMember.length)
       return res.status(400).send("Gagal mengumbah data member");
 

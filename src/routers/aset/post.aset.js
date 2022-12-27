@@ -16,17 +16,17 @@ const addNewAset = async (req, res, next) => {
     if (!addAset.dataValues)
       return res.status(500).send({ message: "Gagal menambahkan aset baru" });
 
-    res.status(200).send({ message: "Success menambahkan aset baru" });
+    res
+      .status(200)
+      .send({
+        message: "Success menambahkan aset baru",
+        data: addAset.dataValues,
+      });
   } catch (error) {
     return res.status(500).send("Something went wrong");
   }
 };
 
-const addNewMemberAset = async (req, res) => {
-  const { anggota_id, daftar_aset_id } = req.body;
-};
-
 router.post("/", addNewAset);
-router.post("/member", addNewMemberAset);
 
 module.exports = router;

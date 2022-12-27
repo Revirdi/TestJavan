@@ -16,9 +16,11 @@ app.use(express.json());
 // router
 const memberRouter = require("./routers/orang");
 const asetRouter = require("./routers/aset");
+const dataAsetRouter = require("./routers/data_aset");
 
 app.use("/member", memberRouter);
 app.use("/aset", asetRouter);
+app.use("/data-aset", dataAsetRouter);
 
 app.get(`/`, (req, res) => {
   res.send("Hello guys :D");
