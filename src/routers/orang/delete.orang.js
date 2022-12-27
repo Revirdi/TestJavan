@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { Orang, Keluarga } = require("../../../models");
+const { Anggota } = require("../../../models");
 
 const deleteMember = async (req, res, next) => {
   try {
-    const { orang_id } = req.params;
+    const { anggota_id } = req.params;
 
-    // const resGetMember = await Orang.destroy({
-    //   where: { orang_id },
-    // });
-
-    const resGetMember = await Orang.findOne({
-      where: { orang_id },
+    const resGetMember = await Anggota.findOne({
+      where: { anggota_id },
     });
 
     let resDeleteMember = await resGetMember.destroy();
@@ -26,6 +22,6 @@ const deleteMember = async (req, res, next) => {
   }
 };
 
-router.delete("/:orang_id", deleteMember);
+router.delete("/:anggota_id", deleteMember);
 
 module.exports = router;

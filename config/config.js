@@ -2,7 +2,7 @@ module.exports = {
   development: {
     username: "root",
     password: "Mysql123",
-    database: "javandb",
+    database: "javandbtest1",
     host: "localhost",
     port: 3306,
     dialect: "mysql",

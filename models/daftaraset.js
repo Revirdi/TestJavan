@@ -2,13 +2,7 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class DaftarAset extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
       DaftarAset.belongsTo(models.Aset, { foreignKey: "daftar_aset_id" });
     }
   }
@@ -20,11 +14,14 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      nama: DataTypes.STRING,
+      nama_aset: DataTypes.STRING,
+      harga: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "DaftarAset",
+      tableName: "daftar_aset",
+      timestamps: false,
     }
   );
   return DaftarAset;

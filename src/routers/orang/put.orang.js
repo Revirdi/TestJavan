@@ -1,19 +1,19 @@
 const express = require("express");
 const router = express.Router();
 
-const { Orang, Keluarga } = require("../../../models");
+const { Anggota } = require("../../../models");
 
 const editMember = async (req, res, next) => {
   try {
-    const { orang_id, nama, jenis_kelamin } = req.body;
+    const { anggota_id, nama, jenis_kelamin } = req.body;
 
-    const resUpdateMember = await Orang.update(
+    const resUpdateMember = await Anggota.update(
       {
         nama,
         jenis_kelamin,
       },
       {
-        where: { orang_id },
+        where: { anggota_id },
       }
     );
     if (!resUpdateMember.length)

@@ -1,31 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const { QueryTypes } = require("sequelize");
-const getPrice = require("../../services/aset.service");
 
-const { Orang, Keluarga, Aset, sequelize } = require("../../../models");
+const { Anggota, HubunganKeluarga } = require("../../../models");
 
 const addNewMember = async (req, res, next) => {
   try {
     const { nama, jenis_kelamin, orangtua_id } = req.body;
 
-    const resGetOrtu = await Orang.findOne({
-      where: { orang_id: orangtua_id },
-      include: { all: true, nested: true },
+    if (jenis_kelamin != "laki-laki" || jenis_kelamin != "perempuan") {
+      res
+        .status(400)
+        .send({ message: "jenis kelamin harus laki-laki / perempuan" });
+    }
+
+    const resGetOrtu = await Anggota.findOne({
+      where: { anggota_id: orangtua_id },
     });
-    // let farid = await getPrice("Iphone X");
-    // console.log(farid);
 
-    // const test = await sequelize.query(
-    //   `select orangs.nama as nama, daftarasets.nama as nama_aset, count(daftarasets.nama) as total_aset from orangs join asets using(orang_id) join daftarasets using(daftar_aset_id) group by nama`,
-    //   {
-    //     type: QueryTypes.SELECT,
-    //   }
-    // );
-
-    // console.log(test);
-
-    const addNewMember = await Orang.create({
+    const addNewMember = await Anggota.create({
       nama,
       jenis_kelamin,
     });
@@ -33,10 +25,9 @@ const addNewMember = async (req, res, next) => {
     if (!addNewMember.dataValues)
       res.status(500).send({ message: "Gagal menambahkan member baru" });
 
-    const addRelation = await Keluarga.create({
-      orang_id: addNewMember.dataValues.orang_id,
-      orang_terkait_id: resGetOrtu.dataValues.orang_id,
-      hubungan_keluarga: "anak",
+    const addRelation = await HubunganKeluarga.create({
+      anggota_id: addNewMember.dataValues.anggota_id,
+      anggota_terkait_id: resGetOrtu.dataValues.anggota_id,
     });
 
     res.status(200).send({
